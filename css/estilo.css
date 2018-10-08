@@ -34,3 +34,20 @@ section.principal h1{
   margin-top: 200px;
   font-size: 90px;
 }
+
+section.formulario {
+  margin-top: 100px;
+
+}
+
+section.formulario form{
+  width: 300px;
+  margin: 10px auto;
+}
+
+section.formulario input,
+section.formulario textarea,
+section.formulario button {
+    margin: 5px 0;
+
+}

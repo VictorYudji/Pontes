@@ -1,10 +1,32 @@
+<?php
+  if ($_GET){
+    $nomearquivo = 'contato.json';
+    if(file_exists($nomearquivo)){
+      $conteudo = file_get_contents($nomearquivo);
+      $conteudo = json_decode($conteudo, true);
+    }else{
+      $conteudo = [];
+    }
+
+    $conteudo[] = $_GET;
+
+    $conteudo_json = json_encode($conteudo);
+
+    file_put_contents($nomearquivo,$conteudo_json);
+    //envia a informacao pra um arquivo json
+
+  }else{
+    echo "Formulário vazio";
+  }
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
-    <title>Pontes</title>
+    <title>Pontes - contato</title>
   </head>
   <body>
     <header>
@@ -30,11 +52,25 @@
         </div>
       </nav>
     </header>
-    <section class="principal">
+    <section class = "formulario">
       <div class="container">
-        <h1>Um novo mercado</h1>
+      <form action="contato.php" method="get">
+        <label for="nome">Nome</label>
+        <input required class="form-control" type="text" name="nome" placeholder="Digite seu nome completo">
+        <label for="email">Email</label>
+        <input required class="form-control" type="email" name="email" placeholder="Digite seu email">
+        <label for="mensagem">Mensagem</label>
+        <textarea required name="mensagem" class= "form-control"></textarea>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+      <div class="text-center">
+        <?php
+          if ($_GET){
+            echo "Obrigado,". $_GET['nome'];
+          }
+         ?>
       </div>
-
+      </div>
     </section>
 
     <script src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
